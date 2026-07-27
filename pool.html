@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>수영장 · 글라스룸 | 여주목마 — 목마 앞에서 쉬는 하루</title>
+    <title>시설안내 | 여주목마 — 물놀이 · 룸 · 애견운동장</title>
     <meta name="theme-color" content="#3F2E24" />
     <link rel="icon" href="images/brand/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="images/brand/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://yeoju-mokma.vercel.app/images/brand/og-preview.png" />
-    <meta name="description" content="여주목마 물놀이장·글라스룸·방갈로. 아울렛에서 약 10분, 목마 앞에서 가족과 쉬는 하루." />
+    <meta
+      name="description"
+      content="여주목마 시설 — 물놀이장·글라스룸·방갈로·애견운동장(무료). 아울렛에서 약 10분."
+    />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/intro.css" />
     <link rel="stylesheet" href="css/directions.css" />
@@ -24,7 +27,9 @@
         <img src="images/brand/logo-mark.png" alt="" width="34" height="34" />
         <span class="logo__word">여주목마</span>
       </a>
-      <p class="status-chip" aria-label="영업 안내"><strong>10:00–20:00</strong><span class="status-chip__sep" aria-hidden="true"></span>월 휴무</p>
+      <p class="status-chip" aria-label="영업 안내">
+        <strong>10:00–20:00</strong><span class="status-chip__sep" aria-hidden="true"></span>월 휴무
+      </p>
       <button class="menu-btn" type="button" aria-label="메뉴" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
         <a href="about.html">이용안내</a>
@@ -43,32 +48,32 @@
         <div class="page-hero__content">
           <p class="breadcrumb"><a href="index.html">홈</a> · 시설안내</p>
           <p class="eyebrow">시설</p>
-          <h1>목마 앞에서<br />물놀이 · 룸</h1>
+          <h1>물놀이 · 룸 ·<br />애견운동장</h1>
         </div>
       </section>
 
       <section class="section section--wood">
         <div class="section__head reveal">
           <p class="eyebrow">휴식</p>
-          <h2>사진 찍고, 물놀이하고,<br />글라스룸에서 쉬세요</h2>
+          <h2>사진 찍고, 물놀이하고,<br />반려견과 쉬세요</h2>
           <p>
-            쇼핑 다음의 여유. 목마 앞 물놀이장과 잔디 위 글라스룸·방갈로.
-            가족·연인·소모임에 맞춰 날짜를 예약하세요. 성수기·주말은 전화 확정을 권합니다.
+            쇼핑 다음의 여유. 목마 앞 물놀이장, 글라스룸·방갈로, 그리고
+            <strong>무료 애견운동장</strong>까지. 가족·연인·반려견 나들이에 맞춰 이용하세요.
           </p>
         </div>
 
-        <div class="near-callout reveal" style="margin-bottom:1.75rem;max-width:52rem">
+        <div class="near-callout reveal" style="margin-bottom: 1.75rem; max-width: 52rem">
           <div class="near-callout__time">
             <span>OUTLET</span>
             약 10분
           </div>
           <p>
             <strong>여주 프리미엄 아울렛</strong>에서 차로 약 10분.
-            쇼핑 후 아이를 위한 물놀이로 하루를 이어가기 좋습니다.
+            쇼핑 후 아이 물놀이·반려견 산책으로 하루를 이어가기 좋습니다.
           </p>
         </div>
 
-        <div class="facility-grid">
+        <div class="facility-grid facility-grid--4">
           <article class="facility-tile reveal">
             <img src="images/news-pool.jpg" alt="여주목마 수영장" />
             <div class="facility-tile__body">
@@ -90,18 +95,68 @@
               <p>독립 좌석·시즌 패키지. 유형은 운영 일정에 따라 달라집니다.</p>
             </div>
           </article>
+          <a class="facility-tile facility-tile--link reveal" href="#pet">
+            <img src="images/gallery-3.jpg" alt="여주목마 야외 잔디·애견 공간" />
+            <div class="facility-tile__body">
+              <p class="facility-tile__badge">FREE</p>
+              <h3>애견운동장</h3>
+              <p>방문 고객 대상 무료. 식사·물놀이 후 반려견과 쉬는 공간.</p>
+            </div>
+          </a>
         </div>
       </section>
 
-      <section class="section">
+      <section class="section" id="pet" aria-labelledby="pet-title">
+        <div class="pet-hero reveal">
+          <div class="pet-hero__visual">
+            <img src="images/gallery-3.jpg" alt="여주목마 야외 잔디·애견운동장 분위기" />
+          </div>
+          <div>
+            <span class="pet-badge">FREE · 애견동반</span>
+            <h2 id="pet-title" style="margin: 0.75rem 0 0; font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 2.2rem); line-height: 1.3">
+              애견운동장<br />무료 이용
+            </h2>
+            <p style="margin: 0.85rem 0 0; color: var(--ink-soft); line-height: 1.75">
+              반려동물과 함께 여주목마를 방문하세요. 애견운동장은
+              <strong>별도 이용료 없이</strong> 이용할 수 있습니다.
+              운영 시간·안전 수칙은 현장 안내를 따릅니다.
+            </p>
+            <ul class="pet-points">
+              <li>
+                <strong>무료 개방</strong>
+                방문 고객 대상 애견운동장 무료 이용
+              </li>
+              <li>
+                <strong>가족 · 펫 나들이</strong>
+                식사·물놀이와 함께 반려견과 쉬는 하루 코스
+              </li>
+              <li>
+                <strong>이용 팁</strong>
+                목줄·배변 봉투 지참 · 다른 반려견·방문객을 배려해 주세요
+              </li>
+            </ul>
+            <p style="margin-top: 1.25rem; display: flex; flex-wrap: wrap; gap: 0.6rem">
+              <a class="btn btn-wood" href="tel:0318810871">이용 문의</a>
+              <a class="btn btn-outline" href="brands.html">식사 후 이용</a>
+              <a class="btn btn-outline" href="directions.html">오시는 길</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--mist">
         <div class="section__head reveal">
           <p class="eyebrow">이용</p>
           <h2>이용 안내</h2>
         </div>
-        <ul class="fact-list reveal" style="max-width:52rem">
+        <ul class="fact-list reveal" style="max-width: 52rem">
           <li>
             <strong>예약</strong>
-            <span>희망 날짜·인원·룸 유형을 남겨 주시면 가능 여부를 안내합니다</span>
+            <span>물놀이·룸은 희망 날짜·인원·유형을 남겨 주시면 가능 여부를 안내합니다</span>
+          </li>
+          <li>
+            <strong>애견운동장</strong>
+            <span>무료 · 예약 불필요 · 영업시간 내 이용 (현장 수칙 준수)</span>
           </li>
           <li>
             <strong>포함</strong>
@@ -111,25 +166,24 @@
             <strong>유의사항</strong>
             <span>외부 음식 반입 제한 가능 · 수영 용품 대여 여부는 문의</span>
           </li>
-          <li>
-            <strong>반려동물</strong>
-            <span>지정 구역·펫룸 가능 여부는 사전 예약 시 확인</span>
-          </li>
         </ul>
       </section>
 
-      <section class="section section--mist" id="inquiry">
+      <section class="section" id="inquiry">
         <div class="section__head reveal">
           <p class="eyebrow">예약</p>
           <h2>수영장 · 룸 예약</h2>
-          <p>날짜와 시설을 고른 뒤 신청하세요. 성수기·주말은 <strong>전화 확정</strong>이 가장 빠릅니다.</p>
+          <p>
+            날짜와 시설을 고른 뒤 신청하세요. 애견운동장은 예약 없이 이용 가능합니다.
+            성수기·주말은 <strong>전화 확정</strong>이 가장 빠릅니다.
+          </p>
         </div>
         <div class="book-strip reveal">
           <div>
             <h3>캘린더 신청 · 전화 확정</h3>
             <p>글라스룸 · 방갈로 · 물놀이장 · 인원까지 한 화면에서 이어집니다.</p>
           </div>
-          <div style="display:flex;flex-wrap:wrap;gap:.65rem">
+          <div style="display: flex; flex-wrap: wrap; gap: 0.65rem">
             <a class="btn btn-wood" href="booking.html?type=pool">예약 신청</a>
             <a class="btn btn-outline" href="tel:0318810871">전화로 바로 확정</a>
           </div>
@@ -161,15 +215,13 @@
             <p>주차 가능 · 애견운동장 무료</p>
           </div>
           <div>
-            <p><a href="https://yeojuin.or.kr/" target="_blank" rel="noopener">자활센터 홈페이지</a></p>
+            <p><a href="pool.html#pet">애견운동장</a></p>
             <p><a href="directions.html">지도 · 교통</a></p>
           </div>
         </div>
-        <p class="footer-copy">© YEOJU MOKMA · Gyeonggi Yeoju Regional Self-Sufficiency Center</p>
+        <p class="footer-copy">© YEOJU MOKMA</p>
       </div>
     </footer>
     <script src="js/main.js"></script>
   </body>
 </html>
-
-
