@@ -153,10 +153,10 @@
   margin: 1.1rem 0 0;
   font-family: var(--font-display);
   font-size: clamp(3.8rem, 12vw, 7rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
   line-height: 1;
-  text-indent: 0.18em;
+  text-indent: 0.2em;
   text-shadow: 0 8px 40px rgba(0, 0, 0, 0.25);
 }
 
@@ -302,8 +302,8 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.28rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
 }
 
 .menu-card__body p {
@@ -337,6 +337,23 @@
 .menus__foot a:hover {
   border-bottom-color: var(--cinnabar);
   color: var(--cinnabar);
+}
+
+.menus__foot .menus__book {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.15rem;
+  border: 0;
+  background: var(--wood-deep);
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.menus__foot .menus__book:hover {
+  background: var(--wood);
+  color: #fff;
+  border-bottom: 0;
 }
 
 .crop-horse {

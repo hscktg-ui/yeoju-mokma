@@ -1,18 +1,25 @@
 /* 예약 — 펜션·아고다식 검색바 + 캘린더 (UI 데모) */
 
-.book-banner {
-  margin-top: var(--header-offset);
-  padding: 0.55rem clamp(1.25rem, 5vw, 4.5rem);
-  background: transparent;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.8rem;
-  color: var(--ink-soft);
-  text-align: center;
+.summary-fields {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.25rem;
 }
 
-.book-banner strong {
-  color: var(--wood);
-  font-weight: 600;
+.summary-fields .field input {
+  background: var(--paper);
+}
+
+.book-banner {
+  margin-top: var(--header-offset);
+  padding: 0.5rem clamp(1.25rem, 5vw, 4.5rem);
+  background: transparent;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  text-align: center;
+  letter-spacing: 0.02em;
 }
 
 .book-hero {
@@ -292,6 +299,7 @@
 .cal-day.is-empty {
   cursor: default;
   visibility: hidden;
+  pointer-events: none;
 }
 
 .cal-day:disabled,

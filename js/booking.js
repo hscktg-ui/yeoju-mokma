@@ -10,7 +10,7 @@
       meta: "최대 6명 · 수영장 연계",
       price: 120000,
       unit: "회",
-      img: "images/news-food6.jpg",
+      img: "images/gallery-6.jpg",
       type: "stay",
     },
     {
@@ -20,7 +20,7 @@
       meta: "최대 8명 · 바비큐 상담",
       price: 150000,
       unit: "회",
-      img: "images/news-pool.jpg",
+      img: "images/gallery-7.jpg",
       type: "stay",
     },
     {
@@ -46,22 +46,23 @@
     },
   ];
 
+  const WEEK = ["일", "월", "화", "수", "목", "금", "토"];
+
   const state = {
     view: startOfMonth(new Date()),
     checkIn: null,
     checkOut: null,
     adults: 2,
     children: 0,
-    roomId: null,
-    picking: "in",
+    roomId: "glass",
+    focusKey: null,
   };
 
   const params = new URLSearchParams(location.search);
   const pref = params.get("type");
-  if (pref === "hall") state.roomId = "hall";
-  else if (pref === "pool") state.roomId = "pool";
-  else if (pref === "glass") state.roomId = "glass";
-  else state.roomId = "glass";
+  if (pref === "hall" || pref === "pool" || pref === "glass" || pref === "bungalow") {
+    state.roomId = pref === "bungalow" ? "bungalow" : pref;
+  }
 
   const els = {
     calTitle: root.querySelector("[data-cal-title]"),
@@ -80,9 +81,13 @@
     sumGuests: root.querySelector("[data-sum-guests]"),
     sumRoom: root.querySelector("[data-sum-room]"),
     sumTotal: root.querySelector("[data-sum-total]"),
+    live: root.querySelector("[data-live]"),
+    name: root.querySelector("[data-guest-name]"),
+    phone: root.querySelector("[data-guest-phone]"),
     submit: root.querySelector("[data-submit]"),
     search: root.querySelector("[data-search]"),
     modal: document.querySelector("[data-book-modal]"),
+    modalBody: document.querySelector("[data-modal-body]"),
     modalClose: document.querySelectorAll("[data-modal-close]"),
   };
 
@@ -91,20 +96,16 @@
   }
 
   function ymd(d) {
-    const y = d.getFullYear();
-    const m = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    return `${y}-${m}-${day}`;
-  }
-
-  function parseYmd(s) {
-    const [y, m, d] = s.split("-").map(Number);
-    return new Date(y, m - 1, d);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   }
 
   function formatKo(d) {
     if (!d) return "날짜 선택";
     return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+  }
+
+  function formatLong(d) {
+    return `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 ${WEEK[d.getDay()]}요일`;
   }
 
   function addDays(d, n) {
@@ -122,7 +123,6 @@
     return d.getDay() === 1;
   }
 
-  /** Demo sold-out: some weekends look busy */
   function isSoldOut(d) {
     const key = ymd(d);
     let hash = 0;
@@ -144,6 +144,21 @@
     return ROOMS.find((r) => r.id === state.roomId) || ROOMS[0];
   }
 
+  function announce(msg) {
+    if (!els.live) return;
+    els.live.textContent = "";
+    window.requestAnimationFrame(() => {
+      els.live.textContent = msg;
+    });
+  }
+
+  function statusLabel(date) {
+    if (isPast(date)) return "지난 날짜";
+    if (isMonday(date)) return "휴무";
+    if (isSoldOut(date)) return "마감";
+    return "예약 가능";
+  }
+
   function renderCalendar() {
     const y = state.view.getFullYear();
     const m = state.view.getMonth();
@@ -153,22 +168,26 @@
     const startPad = first.getDay();
     const daysInMonth = new Date(y, m + 1, 0).getDate();
     const today = ymd(new Date());
+    const inKey = state.checkIn ? ymd(state.checkIn) : null;
+    const outKey = state.checkOut ? ymd(state.checkOut) : null;
+
+    els.calGrid.setAttribute("role", "grid");
+    els.calGrid.setAttribute("aria-label", `${y}년 ${m + 1}월 예약 캘린더`);
 
     const frag = document.createDocumentFragment();
-    const dows = ["일", "월", "화", "수", "목", "금", "토"];
-    dows.forEach((label, i) => {
+    WEEK.forEach((label, i) => {
       const el = document.createElement("div");
       el.className = "cal-dow" + (i === 0 ? " is-sun" : i === 6 ? " is-sat" : "");
+      el.setAttribute("role", "columnheader");
       el.textContent = label;
       frag.appendChild(el);
     });
 
     for (let i = 0; i < startPad; i++) {
-      const empty = document.createElement("button");
-      empty.type = "button";
+      const empty = document.createElement("div");
       empty.className = "cal-day is-empty";
-      empty.disabled = true;
-      empty.tabIndex = -1;
+      empty.setAttribute("role", "gridcell");
+      empty.setAttribute("aria-hidden", "true");
       frag.appendChild(empty);
     }
 
@@ -180,22 +199,33 @@
       btn.className = "cal-day";
       btn.textContent = String(day);
       btn.dataset.date = key;
+      btn.setAttribute("role", "gridcell");
+      btn.setAttribute("aria-label", `${formatLong(date)}, ${statusLabel(date)}`);
 
       if (key === today) btn.classList.add("is-today");
       if (isMonday(date)) btn.classList.add("is-closed");
       if (isSoldOut(date)) btn.classList.add("is-sold");
-      if (isUnavailable(date)) btn.disabled = true;
+      if (isUnavailable(date)) {
+        btn.disabled = true;
+        btn.setAttribute("aria-disabled", "true");
+      }
 
-      const inKey = state.checkIn ? ymd(state.checkIn) : null;
-      const outKey = state.checkOut ? ymd(state.checkOut) : null;
-      if (inKey && key === inKey) btn.classList.add("is-start");
-      if (outKey && key === outKey) btn.classList.add("is-end");
+      if (inKey && key === inKey) {
+        btn.classList.add("is-start");
+        btn.setAttribute("aria-selected", "true");
+      }
+      if (outKey && key === outKey) {
+        btn.classList.add("is-end");
+        btn.setAttribute("aria-selected", "true");
+      }
       if (inKey && outKey && key > inKey && key < outKey) btn.classList.add("is-in-range");
       if (inKey && outKey && (key === inKey || key === outKey) && inKey !== outKey) {
         btn.classList.add("is-in-range");
       }
 
+      btn.tabIndex = state.focusKey === key || (!state.focusKey && !isUnavailable(date) && day === 1) ? 0 : -1;
       btn.addEventListener("click", () => selectDate(date));
+      btn.addEventListener("keydown", (e) => onDayKey(e, date));
       frag.appendChild(btn);
     }
 
@@ -204,48 +234,83 @@
     const now = startOfMonth(new Date());
     els.prev.disabled = state.view <= now;
 
-    // micro feedback on latest pick
-    const pickKey = state.checkOut
-      ? ymd(state.checkOut)
-      : state.checkIn
-        ? ymd(state.checkIn)
-        : null;
+    const pickKey = outKey || inKey;
     if (pickKey) {
-      const picked = els.calGrid.querySelector(`[data-date="${pickKey}"]`);
-      picked?.classList.add("is-just-picked");
+      els.calGrid.querySelector(`[data-date="${pickKey}"]`)?.classList.add("is-just-picked");
     }
+
+    // ensure one tabbable day
+    const focusable = els.calGrid.querySelector(".cal-day:not(:disabled):not(.is-empty)");
+    const current = state.focusKey
+      ? els.calGrid.querySelector(`[data-date="${state.focusKey}"]`)
+      : null;
+    if (current && !current.disabled) {
+      els.calGrid.querySelectorAll(".cal-day[tabindex='0']").forEach((el) => {
+        el.tabIndex = -1;
+      });
+      current.tabIndex = 0;
+    } else if (focusable) {
+      focusable.tabIndex = 0;
+    }
+  }
+
+  function onDayKey(e, date) {
+    const key = e.key;
+    if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Enter", " ", "Home", "End"].includes(key)) {
+      return;
+    }
+    e.preventDefault();
+
+    if (key === "Enter" || key === " ") {
+      selectDate(date);
+      return;
+    }
+
+    let next = date;
+    if (key === "ArrowLeft") next = addDays(date, -1);
+    if (key === "ArrowRight") next = addDays(date, 1);
+    if (key === "ArrowUp") next = addDays(date, -7);
+    if (key === "ArrowDown") next = addDays(date, 7);
+    if (key === "Home") next = new Date(date.getFullYear(), date.getMonth(), 1);
+    if (key === "End") next = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    if (next.getMonth() !== state.view.getMonth() || next.getFullYear() !== state.view.getFullYear()) {
+      state.view = startOfMonth(next);
+      state.focusKey = ymd(next);
+      renderCalendar();
+    } else {
+      state.focusKey = ymd(next);
+      renderCalendar();
+    }
+    els.calGrid.querySelector(`[data-date="${ymd(next)}"]`)?.focus();
   }
 
   function selectDate(date) {
     if (isUnavailable(date)) return;
+    state.focusKey = ymd(date);
 
     if (!state.checkIn || (state.checkIn && state.checkOut) || date < state.checkIn) {
       state.checkIn = date;
       state.checkOut = null;
-      state.picking = "out";
+      announce(`${formatLong(date)} 체크인 선택. 체크아웃 날짜를 골라 주세요.`);
     } else if (date.getTime() === state.checkIn.getTime()) {
       state.checkOut = null;
-      state.picking = "out";
+      announce(`${formatLong(date)} 체크인 유지. 체크아웃을 선택하세요.`);
     } else {
-      // skip if range includes closed monday
       let ok = true;
       for (let d = addDays(state.checkIn, 1); d < date; d = addDays(d, 1)) {
-        if (isMonday(d) && room().type !== "day") {
-          // day-use can still book around mondays for single day; for range stay, block
-        }
         if (isSoldOut(d)) ok = false;
       }
       if (!ok) {
         state.checkIn = date;
         state.checkOut = null;
-        state.picking = "out";
+        announce(`구간 내 마감일이 있어 ${formatLong(date)}을 새 체크인으로 설정했습니다.`);
       } else {
         state.checkOut = date;
-        state.picking = "in";
+        announce(`${formatKo(state.checkIn)}부터 ${formatKo(date)}까지 선택했습니다.`);
       }
     }
 
-    // day-use: same-day checkout optional — if only check-in, treat as 1 day
     if (room().type === "day" && state.checkIn && !state.checkOut) {
       state.checkOut = state.checkIn;
     }
@@ -259,6 +324,7 @@
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "room-card" + (r.id === state.roomId ? " is-selected" : "");
+      btn.setAttribute("aria-pressed", r.id === state.roomId ? "true" : "false");
       btn.innerHTML = `
         <img class="${r.crop || ""}" src="${r.img}" alt="" />
         <div class="room-card__body">
@@ -276,11 +342,18 @@
         if (r.type === "day" && state.checkIn && !state.checkOut) {
           state.checkOut = state.checkIn;
         }
+        announce(`${r.name} 선택`);
         render();
       });
       frag.appendChild(btn);
     });
     els.rooms.replaceChildren(frag);
+  }
+
+  function guestReady() {
+    const name = (els.name?.value || "").trim();
+    const phone = (els.phone?.value || "").trim();
+    return name.length >= 2 && phone.replace(/\D/g, "").length >= 9;
   }
 
   function renderSummary() {
@@ -314,8 +387,7 @@
         r.type === "day" && n === 0
           ? `${formatKo(state.checkIn)} · 당일 이용`
           : `${formatKo(state.checkIn)} – ${formatKo(state.checkOut)}`;
-      els.sumNights.textContent =
-        r.type === "day" ? "데이이용" : `${stayNights}박`;
+      els.sumNights.textContent = r.type === "day" ? "데이이용" : `${stayNights}박`;
     }
 
     els.sumGuests.textContent = `성인 ${state.adults} · 아동 ${state.children} (총 ${guests}명)`;
@@ -337,7 +409,8 @@
       !!state.checkIn &&
       !!state.checkOut &&
       (r.type === "day" || nightsBetween(state.checkIn, state.checkOut) >= 1) &&
-      guests >= 1;
+      guests >= 1 &&
+      guestReady();
 
     els.submit.disabled = !ready;
 
@@ -367,46 +440,67 @@
 
   els.guestsBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
-    els.guestPop.classList.toggle("is-open");
+    const open = els.guestPop.classList.toggle("is-open");
+    els.guestsBtn.setAttribute("aria-expanded", open ? "true" : "false");
   });
 
   document.addEventListener("click", (e) => {
     if (!els.guestPop?.classList.contains("is-open")) return;
     if (els.guestPop.contains(e.target) || els.guestsBtn.contains(e.target)) return;
     els.guestPop.classList.remove("is-open");
+    els.guestsBtn.setAttribute("aria-expanded", "false");
   });
 
   root.querySelectorAll("[data-step]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const who = btn.dataset.step;
       const dir = Number(btn.dataset.dir);
-      if (who === "adults") {
-        state.adults = Math.min(12, Math.max(1, state.adults + dir));
-      } else {
-        state.children = Math.min(8, Math.max(0, state.children + dir));
-      }
+      if (who === "adults") state.adults = Math.min(12, Math.max(1, state.adults + dir));
+      else state.children = Math.min(8, Math.max(0, state.children + dir));
       renderSummary();
     });
   });
+
+  els.name?.addEventListener("input", renderSummary);
+  els.phone?.addEventListener("input", renderSummary);
 
   els.search?.addEventListener("click", () => {
     root.querySelector("#calendar")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  els.checkInBtn?.addEventListener("click", () => {
+    root.querySelector("#calendar")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  els.checkOutBtn?.addEventListener("click", () => {
+    root.querySelector("#calendar")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
   els.submit?.addEventListener("click", () => {
     if (els.submit.disabled) return;
+    const r = room();
+    if (els.modalBody) {
+      els.modalBody.innerHTML = `
+        <p><strong>${(els.name.value || "").trim()}</strong> 님</p>
+        <p>${els.sumDates.textContent}</p>
+        <p>${r.name} · ${els.sumGuests.textContent}</p>
+        <p>예상 ${els.sumTotal.textContent}</p>
+        <p class="summary-note">결제·확정 연동 전 데모입니다. 전화로 바로 확정할 수 있습니다.</p>
+      `;
+    }
     els.modal?.classList.add("is-open");
+    announce("예약 신청이 준비되었습니다.");
   });
 
   els.modalClose.forEach((btn) => {
     btn.addEventListener("click", () => els.modal?.classList.remove("is-open"));
   });
-
   els.modal?.addEventListener("click", (e) => {
     if (e.target === els.modal) els.modal.classList.remove("is-open");
   });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") els.modal?.classList.remove("is-open");
+  });
 
-  // Prefill near weekend for demo feel
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   let seed = addDays(today, 2);
@@ -420,6 +514,7 @@
   }
   state.checkOut = out;
   state.view = startOfMonth(seed);
+  state.focusKey = ymd(seed);
 
   render();
 })();

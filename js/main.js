@@ -81,12 +81,34 @@
       const type = form.dataset.inquiry || "inquiry";
       const subject = encodeURIComponent(`[여주목마 ${type}] 예약/문의`);
       const body = encodeURIComponent(lines.join("\n"));
-      // 실제 메일 연동 전: 화면 피드백 + mailto 초안
       success?.classList.add("is-visible");
       form.reset();
       window.setTimeout(() => {
         window.location.href = `mailto:yeojumokma@example.com?subject=${subject}&body=${body}`;
       }, 400);
+    });
+  });
+
+  /* Menu photo thumbs → main crossfade */
+  document.querySelectorAll("[data-photo-thumbs]").forEach((thumbs) => {
+    const card = thumbs.closest(".brand-card");
+    const main = card?.querySelector("[data-photo-main] img");
+    if (!main) return;
+
+    thumbs.querySelectorAll("button[data-src]").forEach((btn) => {
+      const swap = () => {
+        const src = btn.dataset.src;
+        if (!src || main.getAttribute("src") === src) return;
+        thumbs.querySelectorAll("button").forEach((b) => b.classList.remove("is-active"));
+        btn.classList.add("is-active");
+        main.classList.remove("is-fading");
+        void main.offsetWidth;
+        main.src = src;
+        main.classList.add("is-fading");
+      };
+      btn.addEventListener("mouseenter", swap);
+      btn.addEventListener("focus", swap);
+      btn.addEventListener("click", swap);
     });
   });
 })();

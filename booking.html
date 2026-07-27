@@ -39,9 +39,9 @@
     </header>
 
     <main id="main" data-booking>
+      <p class="sr-only" data-live aria-live="polite"></p>
       <p class="book-banner">
-        <strong>예약 UI 미리보기</strong>
-        — 캘린더·요금은 데모입니다. 실제 결제·확정 연동은 추후 개발 예정입니다.
+        요금·재고는 참고용입니다. 확정은 신청 후 안내됩니다.
       </p>
 
       <section class="book-hero" aria-label="예약">
@@ -70,7 +70,7 @@
         </div>
         <div class="book-search__field">
           <label>인원</label>
-          <button class="trigger" type="button" data-guests>
+          <button class="trigger" type="button" data-guests aria-expanded="false" aria-haspopup="true">
             <span class="value">성인 2</span>
           </button>
           <div class="guest-pop" data-guest-pop>
@@ -157,12 +157,22 @@
               <dd data-sum-room>—</dd>
             </div>
           </dl>
+          <div class="summary-fields">
+            <div class="field">
+              <label for="guest-name">예약자 이름</label>
+              <input id="guest-name" data-guest-name type="text" autocomplete="name" required placeholder="홍길동" />
+            </div>
+            <div class="field">
+              <label for="guest-phone">연락처</label>
+              <input id="guest-phone" data-guest-phone type="tel" autocomplete="tel" required placeholder="010-0000-0000" />
+            </div>
+          </div>
           <div class="summary-total">
             <span>예상 금액</span>
             <strong data-sum-total>—</strong>
           </div>
           <p class="summary-note">
-            실제 결제·재고 연동 전 단계입니다. 예약 신청 시 문의 접수로 이어질 예정입니다.
+            결제 연동 전입니다. 신청 내용을 바탕으로 운영팀이 확정 안내합니다.
           </p>
           <button class="btn btn-wood" type="button" data-submit disabled>예약 신청</button>
           <a class="btn btn-outline" href="tel:0318810871">전화 문의</a>
@@ -173,11 +183,12 @@
     <div class="book-modal" data-book-modal role="dialog" aria-modal="true" aria-labelledby="book-modal-title">
       <div class="book-modal__card">
         <h3 id="book-modal-title">예약 신청이 준비되었습니다</h3>
-        <p>
-          지금은 UI 데모입니다.<br />
-          결제·확정 시스템은 추후 연동됩니다.<br />
-          급한 일정은 전화로 문의해 주세요.
-        </p>
+        <div data-modal-body>
+          <p>
+            결제·확정 시스템은 추후 연동됩니다.<br />
+            급한 일정은 전화로 문의해 주세요.
+          </p>
+        </div>
         <button class="btn btn-wood" type="button" data-modal-close>확인</button>
         <p style="margin-top: 1rem">
           <a href="tel:0318810871">031-881-0871</a>

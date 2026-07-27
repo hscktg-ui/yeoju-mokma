@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/intro.css" />
     <link rel="stylesheet" href="css/directions.css" />
+    <link rel="stylesheet" href="css/booking.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문 바로가기</a>
@@ -56,13 +57,22 @@
 
         <div class="brand-grid brand-grid--menu">
           <article class="brand-card brand-card--menu reveal">
-            <div class="brand-card__photo">
+            <div class="brand-card__photo" data-photo-main>
               <img src="images/menu/tokyo-steak-1.jpg" alt="도쿄스테이크 새우·치킨 스테이크 정식" />
             </div>
-            <div class="brand-card__thumbs" aria-hidden="true">
-              <img src="images/menu/tokyo-steak-2.jpg" alt="" />
-              <img src="images/menu/tokyo-steak-3.jpg" alt="" />
-              <img src="images/menu/tokyo-steak-5.jpg" alt="" />
+            <div class="brand-card__thumbs" data-photo-thumbs>
+              <button type="button" class="is-active" data-src="images/menu/tokyo-steak-1.jpg" aria-label="메뉴 사진 1">
+                <img src="images/menu/tokyo-steak-1.jpg" alt="" />
+              </button>
+              <button type="button" data-src="images/menu/tokyo-steak-2.jpg" aria-label="메뉴 사진 2">
+                <img src="images/menu/tokyo-steak-2.jpg" alt="" />
+              </button>
+              <button type="button" data-src="images/menu/tokyo-steak-3.jpg" aria-label="메뉴 사진 3">
+                <img src="images/menu/tokyo-steak-3.jpg" alt="" />
+              </button>
+              <button type="button" data-src="images/menu/tokyo-steak-5.jpg" aria-label="메뉴 사진 4">
+                <img src="images/menu/tokyo-steak-5.jpg" alt="" />
+              </button>
             </div>
             <div class="brand-card__body">
               <p class="brand-card__floor">1F · STEAK</p>
@@ -133,7 +143,18 @@
           도쿄스테이크 메뉴 컷: 브랜드 공식 자료 · 그 외 대표 메뉴 이미지는 분위기 연출용입니다. 실제 플레이팅은 매장과 다를 수 있습니다.
         </p>
 
-        <div class="reveal" style="margin-top:2rem;padding:1.35rem 1.4rem;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
+        <div class="book-strip reveal" style="margin-top:2rem">
+          <div>
+            <h3>식사 후, 수영장·룸·홀 예약</h3>
+            <p>날짜를 고르고 글라스룸·방갈로·어울림홀을 한 화면에서 신청하세요.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:.65rem">
+            <a class="btn btn-wood" href="booking.html">예약하기</a>
+            <a class="btn btn-outline" href="booking.html?type=hall">대관 예약</a>
+          </div>
+        </div>
+
+        <div class="reveal" style="margin-top:1.25rem;padding:1.35rem 1.4rem;background:#fff;border:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between">
           <div>
             <span class="pet-badge">FREE</span>
             <p style="margin:.55rem 0 0;font-family:var(--font-display);font-size:1.25rem">식사 후 애견운동장</p>
