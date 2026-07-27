@@ -94,6 +94,18 @@
     }
   });
 
+
+  // Deep-link sections (e.g. pool.html#pet)
+  const goHash = () => {
+    if (!location.hash || location.hash.length < 2) return;
+    const el = document.getElementById(location.hash.slice(1));
+    if (el) {
+      window.setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    }
+  };
+  window.addEventListener("load", goHash);
+  window.addEventListener("hashchange", goHash);
+
   document.querySelectorAll("form[data-inquiry]").forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
