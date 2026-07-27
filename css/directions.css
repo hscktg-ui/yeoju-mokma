@@ -1,0 +1,149 @@
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 0;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+}
+
+.tabs__btn {
+  appearance: none;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  padding: 0.95rem 1.35rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: var(--font-display);
+}
+
+.tabs__btn:last-child {
+  border-right: 0;
+}
+
+.tabs__btn:hover {
+  color: var(--wood-deep);
+  background: var(--hanji);
+}
+
+.tabs__btn.is-active {
+  background: var(--wood-deep);
+  color: #fff;
+}
+
+.tab-panel {
+  display: none;
+  padding: 1.5rem 0 0;
+}
+
+.tab-panel.is-active {
+  display: block;
+  animation: rise 0.45s ease;
+}
+
+.map-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  min-height: 320px;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  background: var(--mist);
+}
+
+.map-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.1rem;
+}
+
+.pet-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: stretch;
+}
+
+@media (max-width: 800px) {
+  .pet-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pet-hero__visual {
+  overflow: hidden;
+  min-height: 280px;
+  border: 1px solid var(--line-strong);
+  position: relative;
+}
+
+.pet-hero__visual img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  object-position: 25% 60%;
+}
+
+.pet-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(180, 35, 24, 0.08);
+  color: var(--cinnabar);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(180, 35, 24, 0.2);
+}
+
+.pet-badge--on-dark {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.pet-points {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.pet-points li {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pet-points strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--cinnabar);
+  font-size: 0.88rem;
+  font-family: var(--font-display);
+}
+
+.panel-note {
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  background: var(--mist);
+  border-left: 3px solid var(--cinnabar);
+}

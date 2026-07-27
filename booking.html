@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>예약 | 여주목마</title>
+    <meta
+      name="description"
+      content="여주목마 수영장·글라스룸·방갈로·어울림홀 예약. 날짜를 선택하고 시설을 고르세요."
+    />
+    <meta name="theme-color" content="#3F2E24" />
+    <link rel="icon" href="images/brand/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="images/brand/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="예약 | 여주목마" />
+    <meta property="og:image" content="images/brand/og-preview.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/intro.css" />
+    <link rel="stylesheet" href="css/booking.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문 바로가기</a>
+    <div class="util-bar">
+      <div class="util-bar__left">
+        <span><strong>이용시간</strong> 10:00–20:00</span>
+        <span class="dot hide-sm" aria-hidden="true">|</span>
+        <span class="hide-sm"><strong>휴무</strong> 매주 월요일</span>
+      </div>
+      <div class="util-bar__right">
+        <a href="directions.html">오시는 길</a>
+        <span class="dot" aria-hidden="true">|</span>
+        <a href="tel:0318810871">031-881-0871</a>
+      </div>
+    </div>
+
+    <header class="site-header is-solid">
+      <a class="logo" href="index.html">
+        <img src="images/brand/logo-mark.png" alt="" width="34" height="34" />
+        <span class="logo__word">여주목마</span>
+      </a>
+      <button class="menu-btn" type="button" aria-label="메뉴" aria-expanded="false">☰</button>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="about.html">이용안내</a>
+        <a href="brands.html">식음료</a>
+        <a href="pool.html">시설안내</a>
+        <a href="hall.html">대관안내</a>
+        <a href="directions.html">오시는 길</a>
+        <a class="nav-cta is-active" href="booking.html">예약</a>
+      </nav>
+    </header>
+
+    <main id="main" data-booking>
+      <p class="book-banner">
+        <strong>예약 UI 미리보기</strong>
+        — 캘린더·요금은 데모입니다. 실제 결제·확정 연동은 추후 개발 예정입니다.
+      </p>
+
+      <section class="book-hero" aria-label="예약">
+        <img class="crop-horse" src="images/official-mokma.jpg" alt="여주목마" />
+        <div class="book-hero__shade" aria-hidden="true"></div>
+        <div class="book-hero__content">
+          <p class="breadcrumb"><a href="index.html">홈</a> · 예약</p>
+          <p class="eyebrow">Reservation</p>
+          <h1>예약하기</h1>
+          <p class="lead">날짜를 고르고, 머무를 공간을 선택하세요.</p>
+        </div>
+      </section>
+
+      <div class="book-search" role="search" aria-label="예약 조건">
+        <div class="book-search__field">
+          <label>체크인</label>
+          <button class="trigger" type="button" data-checkin>
+            <span class="value">날짜 선택</span>
+          </button>
+        </div>
+        <div class="book-search__field">
+          <label>체크아웃</label>
+          <button class="trigger" type="button" data-checkout>
+            <span class="value">날짜 선택</span>
+          </button>
+        </div>
+        <div class="book-search__field">
+          <label>인원</label>
+          <button class="trigger" type="button" data-guests>
+            <span class="value">성인 2</span>
+          </button>
+          <div class="guest-pop" data-guest-pop>
+            <div class="guest-step">
+              <div>
+                <p>성인</p>
+                <span>만 13세 이상</span>
+              </div>
+              <div class="stepper">
+                <button type="button" data-step="adults" data-dir="-1" aria-label="성인 감소">−</button>
+                <b data-adults>2</b>
+                <button type="button" data-step="adults" data-dir="1" aria-label="성인 증가">+</button>
+              </div>
+            </div>
+            <div class="guest-step">
+              <div>
+                <p>아동</p>
+                <span>만 12세 이하</span>
+              </div>
+              <div class="stepper">
+                <button type="button" data-step="children" data-dir="-1" aria-label="아동 감소">−</button>
+                <b data-children>0</b>
+                <button type="button" data-step="children" data-dir="1" aria-label="아동 증가">+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="book-search__field">
+          <label>안내</label>
+          <div class="value" style="pointer-events: none">
+            <span class="hint">월요일 휴무 · 요금은 참고가</span>
+          </div>
+        </div>
+        <button class="book-search__cta" type="button" data-search>검색</button>
+      </div>
+
+      <div class="book-layout">
+        <div>
+          <section class="book-panel" id="calendar" aria-labelledby="cal-heading">
+            <div class="book-panel__head">
+              <h2 id="cal-heading">날짜 선택</h2>
+              <p>체크인 → 체크아웃 순으로 눌러 주세요</p>
+            </div>
+            <div class="cal-nav">
+              <button type="button" data-cal-prev aria-label="이전 달">‹</button>
+              <h3 data-cal-title>2026년 7월</h3>
+              <button type="button" data-cal-next aria-label="다음 달">›</button>
+            </div>
+            <div class="cal-grid" data-cal-grid></div>
+            <div class="cal-legend">
+              <span><i class="lg-avail"></i> 예약 가능</span>
+              <span><i class="lg-pick"></i> 선택</span>
+              <span><i class="lg-range"></i> 숙박 구간</span>
+              <span><i class="lg-off"></i> 휴무·마감</span>
+            </div>
+          </section>
+
+          <section class="book-panel" aria-labelledby="rooms-heading">
+            <div class="book-panel__head">
+              <h2 id="rooms-heading">시설 선택</h2>
+              <p>요금은 참고용 · 확정은 상담 후</p>
+            </div>
+            <div class="room-list" data-rooms></div>
+          </section>
+        </div>
+
+        <aside class="book-panel book-summary" aria-label="예약 요약">
+          <h2>예약 요약</h2>
+          <dl class="summary-rows">
+            <div>
+              <dt>일정</dt>
+              <dd data-sum-dates>—</dd>
+            </div>
+            <div>
+              <dt>기간</dt>
+              <dd data-sum-nights>—</dd>
+            </div>
+            <div>
+              <dt>인원</dt>
+              <dd data-sum-guests>—</dd>
+            </div>
+            <div>
+              <dt>시설</dt>
+              <dd data-sum-room>—</dd>
+            </div>
+          </dl>
+          <div class="summary-total">
+            <span>예상 금액</span>
+            <strong data-sum-total>—</strong>
+          </div>
+          <p class="summary-note">
+            실제 결제·재고 연동 전 단계입니다. 예약 신청 시 문의 접수로 이어질 예정입니다.
+          </p>
+          <button class="btn btn-wood" type="button" data-submit disabled>예약 신청</button>
+          <a class="btn btn-outline" href="tel:0318810871">전화 문의</a>
+        </aside>
+      </div>
+    </main>
+
+    <div class="book-modal" data-book-modal role="dialog" aria-modal="true" aria-labelledby="book-modal-title">
+      <div class="book-modal__card">
+        <h3 id="book-modal-title">예약 신청이 준비되었습니다</h3>
+        <p>
+          지금은 UI 데모입니다.<br />
+          결제·확정 시스템은 추후 연동됩니다.<br />
+          급한 일정은 전화로 문의해 주세요.
+        </p>
+        <button class="btn btn-wood" type="button" data-modal-close>확인</button>
+        <p style="margin-top: 1rem">
+          <a href="tel:0318810871">031-881-0871</a>
+        </p>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <nav class="footer-quick" aria-label="하단 바로가기">
+        <a href="about.html">이용안내</a>
+        <a href="brands.html">식음료</a>
+        <a href="pool.html">시설안내</a>
+        <a href="hall.html">대관안내</a>
+        <a href="booking.html">예약</a>
+        <a href="directions.html">오시는 길</a>
+      </nav>
+      <div class="footer-body">
+        <strong class="brand">여주목마</strong>
+        <div class="footer-grid">
+          <div>
+            <p>경기여주지역자활센터 목마사업단</p>
+            <p>(12653) 경기도 여주시 명품로 142</p>
+            <p>Tel. 031-881-0871~2</p>
+          </div>
+          <div>
+            <p>이용시간 10:00–20:00</p>
+            <p>휴무 매주 월요일</p>
+            <p>주차 가능 · 애견운동장 무료</p>
+          </div>
+          <div>
+            <p><a href="directions.html">지도 · 교통</a></p>
+            <p><a href="booking.html">온라인 예약</a></p>
+          </div>
+        </div>
+        <p class="footer-copy">© YEOJU MOKMA · Gyeonggi Yeoju Regional Self-Sufficiency Center</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/booking.js"></script>
+  </body>
+</html>
