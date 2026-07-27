@@ -18,11 +18,37 @@
       property="og:description"
       content="여주에서만 찍는 25m 목마. 아울렛에서 차로 약 10분 — 사진, 식사, 휴식이 남는 하루."
     />
-    <meta property="og:image" content="images/brand/og-preview.png" />
+    <meta property="og:url" content="https://yeoju-mokma.vercel.app/" />
+    <meta property="og:image" content="https://yeoju-mokma.vercel.app/images/brand/og-preview.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/intro.css" />
     <link rel="stylesheet" href="css/brand-story.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TouristAttraction",
+        "name": "여주목마",
+        "description": "여주 프리미엄 아울렛에서 차로 약 10분. 25m 국산 목재 트로이 목마와 식사·물놀이·애견운동장·대관.",
+        "url": "https://yeoju-mokma.vercel.app/",
+        "telephone": "+82-31-881-0871",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "명품로 142",
+          "addressLocality": "여주시",
+          "addressRegion": "경기도",
+          "postalCode": "12653",
+          "addressCountry": "KR"
+        },
+        "openingHoursSpecification": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "10:00",
+          "closes": "20:00"
+        },
+        "image": "https://yeoju-mokma.vercel.app/images/official-mokma.jpg"
+      }
+    </script>
   </head>
   <body class="page-intro">
     <a class="skip-link" href="#main">본문 바로가기</a>
@@ -61,9 +87,13 @@
           <h1>여주목마</h1>
           <p class="gate__line">쇼핑 다음,<br />목마 앞에서</p>
           <p class="gate__support">여주에서만 찍는 25m · 식사와 휴식이 이어집니다</p>
+          <div class="gate__cta">
+            <a class="btn btn-primary" href="booking.html">예약하기</a>
+            <a class="btn btn-outline gate__cta-ghost" href="directions.html">오시는 길</a>
+          </div>
         </div>
 
-        <a class="gate__scroll" href="#signature">하루 코스 보기</a>
+        <a class="gate__scroll" href="#courses">하루 코스 보기</a>
       </section>
 
       <section class="signature" id="signature" aria-labelledby="sig-title">
@@ -135,23 +165,55 @@
         </header>
         <div class="courses__grid">
           <article class="course-card reveal">
-            <p class="course-card__tag">추천</p>
+            <p class="course-card__tag">추천 · 반나절</p>
             <h3>아울렛 + 목마</h3>
-            <p>쇼핑 → 10분 이동 → 목마 포토 → 식사·카페. 반나절에 끝나는 가장 쉬운 코스.</p>
-            <a href="directions.html">길찾기</a>
+            <ol class="course-card__steps">
+              <li>여주 프리미엄 아울렛 쇼핑</li>
+              <li>차로 약 10분 이동</li>
+              <li>25m 목마 포토</li>
+              <li>도쿄스테이크·카페 트로이</li>
+            </ol>
+            <div class="course-card__links">
+              <a href="directions.html">길찾기</a>
+              <a href="brands.html">식음료</a>
+            </div>
           </article>
           <article class="course-card reveal">
-            <p class="course-card__tag">가족</p>
+            <p class="course-card__tag">가족 · 3–5시간</p>
             <h3>아이 · 물놀이</h3>
-            <p>목마 앞에서 사진, 야외 물놀이, 글라스룸에서 쉬는 가족 나들이.</p>
-            <a href="pool.html">시설 보기</a>
+            <ol class="course-card__steps">
+              <li>목마 앞에서 가족 사진</li>
+              <li>야외 물놀이</li>
+              <li>글라스룸·방갈로 휴식</li>
+              <li>국수나무·한정식 여목</li>
+            </ol>
+            <div class="course-card__links">
+              <a href="pool.html">시설 보기</a>
+              <a href="booking.html?type=pool">예약</a>
+            </div>
           </article>
           <article class="course-card reveal">
-            <p class="course-card__tag">함께</p>
+            <p class="course-card__tag">함께 · 반나절+</p>
             <h3>애견 · 모임</h3>
-            <p>애견운동장 무료, 어울림홀 대관. 반려견과, 또는 모임으로.</p>
-            <a href="hall.html">대관 안내</a>
+            <ol class="course-card__steps">
+              <li>식사 후 애견운동장(무료)</li>
+              <li>어울림홀 모임·돌잔치</li>
+              <li>목마 포토존 기념촬영</li>
+            </ol>
+            <div class="course-card__links">
+              <a href="directions.html#pet">애견 안내</a>
+              <a href="hall.html">대관 안내</a>
+            </div>
           </article>
+        </div>
+      </section>
+
+      <section class="atm-strip" aria-label="현장 분위기">
+        <div class="atm-strip__grid">
+          <img src="images/news-pool.jpg" alt="여주목마 물놀이장과 목마" />
+          <img src="images/news-food4.jpg" alt="여주목마 다이닝" />
+          <img src="images/gallery-6.jpg" alt="여주목마 글라스룸 분위기" />
+          <img src="images/gallery-2.jpg" alt="여주목마 야외 전경" />
         </div>
       </section>
 
@@ -184,7 +246,7 @@
 
           <a class="menu-card" href="pool.html">
             <div class="menu-card__photo">
-              <img class="crop-pool" src="images/official-mokma.jpg" alt="" />
+              <img src="images/news-pool.jpg" alt="" />
             </div>
             <div class="menu-card__body">
               <h3>시설안내</h3>
@@ -212,6 +274,37 @@
         </p>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <nav class="footer-quick" aria-label="하단 바로가기">
+        <a href="about.html">이용안내</a>
+        <a href="brands.html">식음료</a>
+        <a href="pool.html">시설안내</a>
+        <a href="hall.html">대관안내</a>
+        <a href="directions.html">오시는 길</a>
+        <a href="booking.html">예약</a>
+      </nav>
+      <div class="footer-body">
+        <strong class="brand">여주목마</strong>
+        <div class="footer-grid">
+          <div>
+            <p>경기여주지역자활센터 목마사업단</p>
+            <p>(12653) 경기도 여주시 명품로 142</p>
+            <p>Tel. 031-881-0871~2</p>
+          </div>
+          <div>
+            <p>이용시간 10:00–20:00</p>
+            <p>휴무 매주 월요일</p>
+            <p>여주 프리미엄 아울렛에서 차로 약 10분</p>
+          </div>
+          <div>
+            <p><a href="directions.html">지도 · 교통</a></p>
+            <p><a href="booking.html">온라인 예약</a></p>
+          </div>
+        </div>
+        <p class="footer-copy">© YEOJU MOKMA</p>
+      </div>
+    </footer>
 
     <script src="js/main.js"></script>
   </body>

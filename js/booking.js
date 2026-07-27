@@ -30,8 +30,7 @@
       meta: "인원별 안내 · 룸 병행 가능",
       price: 45000,
       unit: "4인 기준",
-      img: "images/official-mokma.jpg",
-      crop: "crop-pool",
+      img: "images/news-pool.jpg",
       type: "day",
     },
     {
@@ -124,10 +123,7 @@
   }
 
   function isSoldOut(d) {
-    const key = ymd(d);
-    let hash = 0;
-    for (let i = 0; i < key.length; i++) hash = (hash * 31 + key.charCodeAt(i)) >>> 0;
-    return hash % 11 === 0 && d.getDay() === 0;
+    return false;
   }
 
   function isPast(d) {
@@ -292,10 +288,10 @@
     if (!state.checkIn || (state.checkIn && state.checkOut) || date < state.checkIn) {
       state.checkIn = date;
       state.checkOut = null;
-      announce(`${formatLong(date)} 체크인 선택. 체크아웃 날짜를 골라 주세요.`);
+      announce(`${formatLong(date)} 방문일 선택. 종료일을 골라 주세요.`);
     } else if (date.getTime() === state.checkIn.getTime()) {
       state.checkOut = null;
-      announce(`${formatLong(date)} 체크인 유지. 체크아웃을 선택하세요.`);
+      announce(`${formatLong(date)} 방문일 유지. 종료일을 선택하세요.`);
     } else {
       let ok = true;
       for (let d = addDays(state.checkIn, 1); d < date; d = addDays(d, 1)) {
@@ -304,7 +300,7 @@
       if (!ok) {
         state.checkIn = date;
         state.checkOut = null;
-        announce(`구간 내 마감일이 있어 ${formatLong(date)}을 새 체크인으로 설정했습니다.`);
+        announce(`구간 내 마감일이 있어 ${formatLong(date)}을 새 방문일로 설정했습니다.`);
       } else {
         state.checkOut = date;
         announce(`${formatKo(state.checkIn)}부터 ${formatKo(date)}까지 선택했습니다.`);
@@ -380,14 +376,14 @@
       els.sumDates.textContent = "캘린더에서 날짜를 선택하세요";
       els.sumNights.textContent = "—";
     } else if (!state.checkOut || (r.type !== "day" && n < 1)) {
-      els.sumDates.textContent = `${formatKo(state.checkIn)} → 체크아웃 선택`;
+      els.sumDates.textContent = `${formatKo(state.checkIn)} → 종료일 선택`;
       els.sumNights.textContent = "—";
     } else {
       els.sumDates.textContent =
         r.type === "day" && n === 0
           ? `${formatKo(state.checkIn)} · 당일 이용`
           : `${formatKo(state.checkIn)} – ${formatKo(state.checkOut)}`;
-      els.sumNights.textContent = r.type === "day" ? "데이이용" : `${stayNights}박`;
+      els.sumNights.textContent = r.type === "day" ? "당일 이용" : r.type === "hall" ? `${Math.max(stayNights, 1)}일 대관` : `${Math.max(stayNights, 1)}일`;
     }
 
     els.sumGuests.textContent = `성인 ${state.adults} · 아동 ${state.children} (총 ${guests}명)`;
@@ -475,30 +471,68 @@
     root.querySelector("#calendar")?.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  let lastFocus = null;
+  function openModal() {
+    lastFocus = document.activeElement;
+    els.modal?.classList.add("is-open");
+    const focusable = els.modal?.querySelector("button, a[href], input");
+    focusable?.focus();
+  }
+  function closeModal() {
+    els.modal?.classList.remove("is-open");
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  }
+
   els.submit?.addEventListener("click", () => {
     if (els.submit.disabled) return;
     const r = room();
     if (els.modalBody) {
-      els.modalBody.innerHTML = `
-        <p><strong>${(els.name.value || "").trim()}</strong> 님</p>
-        <p>${els.sumDates.textContent}</p>
-        <p>${r.name} · ${els.sumGuests.textContent}</p>
-        <p>예상 ${els.sumTotal.textContent}</p>
-        <p class="summary-note">결제·확정 연동 전 데모입니다. 전화로 바로 확정할 수 있습니다.</p>
-      `;
+      const name = (els.name.value || "").trim();
+      const phone = (els.phone.value || "").trim();
+      const subject = encodeURIComponent("[여주목마 예약] " + name);
+      const body = encodeURIComponent(
+        "예약자: " + name + "\n연락처: " + phone + "\n일정: " + els.sumDates.textContent +
+        "\n시설: " + r.name + "\n인원: " + els.sumGuests.textContent + "\n예상: " + els.sumTotal.textContent + "\n"
+      );
+      els.modalBody.innerHTML =
+        "<p><strong>" + name + "</strong> 님</p>" +
+        "<p>" + els.sumDates.textContent + "</p>" +
+        "<p>" + r.name + " · " + els.sumGuests.textContent + "</p>" +
+        "<p>예상 " + els.sumTotal.textContent + "</p>" +
+        '<p class="summary-note">온라인 신청 내용을 운영팀이 확인한 뒤 확정 안내합니다.</p>' +
+        '<p style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:.55rem;justify-content:center">' +
+        '<a class="btn btn-wood" href="tel:0318810871">전화로 확정</a>' +
+        '<a class="btn btn-outline" href="sms:0318810871">문자 보내기</a>' +
+        '<a class="btn btn-outline" href="mailto:hscktg@gmail.com?subject=' + subject + "&body=" + body + '">이메일로 보내기</a>' +
+        "</p>";
     }
-    els.modal?.classList.add("is-open");
-    announce("예약 신청이 준비되었습니다.");
+    openModal();
+    announce("예약 신청이 준비되었습니다. 전화로 바로 확정할 수 있습니다.");
   });
 
   els.modalClose.forEach((btn) => {
-    btn.addEventListener("click", () => els.modal?.classList.remove("is-open"));
+    btn.addEventListener("click", closeModal);
   });
   els.modal?.addEventListener("click", (e) => {
-    if (e.target === els.modal) els.modal.classList.remove("is-open");
+    if (e.target === els.modal) closeModal();
   });
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") els.modal?.classList.remove("is-open");
+    if (e.key === "Escape" && els.modal?.classList.contains("is-open")) closeModal();
+    if (e.key === "Tab" && els.modal?.classList.contains("is-open")) {
+      const nodes = [...els.modal.querySelectorAll("button, a[href], input, select, textarea")].filter(
+        (el) => !el.disabled
+      );
+      if (!nodes.length) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
   });
 
   const today = new Date();

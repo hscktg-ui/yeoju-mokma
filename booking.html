@@ -41,7 +41,7 @@
     <main id="main" data-booking>
       <p class="sr-only" data-live aria-live="polite"></p>
       <p class="book-banner">
-        요금·재고는 참고용입니다. 확정은 신청 후 안내됩니다.
+        온라인 신청 → 운영팀 확정 안내. 급한 일정은 전화(031-881-0871)로 바로 문의하세요.
       </p>
 
       <section class="book-hero" aria-label="예약">
@@ -50,20 +50,20 @@
         <div class="book-hero__content">
           <p class="breadcrumb"><a href="index.html">홈</a> · 예약</p>
           <p class="eyebrow">예약</p>
-          <h1>예약하기</h1>
-          <p class="lead">날짜를 고르고, 머무를 공간을 선택하세요.</p>
+          <h1>쇼핑 다음,<br />목마에서 머무르기</h1>
+          <p class="lead">방문일을 고르고, 수영장·룸·홀을 선택하세요. 확정은 전화·상담으로 이어집니다.</p>
         </div>
       </section>
 
       <div class="book-search" role="search" aria-label="예약 조건">
         <div class="book-search__field">
-          <label>체크인</label>
+          <label>방문 시작</label>
           <button class="trigger" type="button" data-checkin>
             <span class="value">날짜 선택</span>
           </button>
         </div>
         <div class="book-search__field">
-          <label>체크아웃</label>
+          <label>방문 종료</label>
           <button class="trigger" type="button" data-checkout>
             <span class="value">날짜 선택</span>
           </button>
@@ -112,7 +112,7 @@
           <section class="book-panel" id="calendar" aria-labelledby="cal-heading">
             <div class="book-panel__head">
               <h2 id="cal-heading">날짜 선택</h2>
-              <p>체크인 → 체크아웃 순으로 눌러 주세요</p>
+              <p>시작일 → 종료일 순으로 눌러 주세요 (당일 이용은 같은 날)</p>
             </div>
             <div class="cal-nav">
               <button type="button" data-cal-prev aria-label="이전 달">‹</button>
@@ -123,8 +123,8 @@
             <div class="cal-legend">
               <span><i class="lg-avail"></i> 예약 가능</span>
               <span><i class="lg-pick"></i> 선택</span>
-              <span><i class="lg-range"></i> 숙박 구간</span>
-              <span><i class="lg-off"></i> 휴무·마감</span>
+              <span><i class="lg-range"></i> 이용 구간</span>
+              <span><i class="lg-off"></i> 휴무</span>
             </div>
           </section>
 
@@ -172,10 +172,10 @@
             <strong data-sum-total>—</strong>
           </div>
           <p class="summary-note">
-            결제 연동 전입니다. 신청 내용을 바탕으로 운영팀이 확정 안내합니다.
+            신청 후 운영팀이 가능 여부를 확인해 드립니다. 성수기·주말은 전화 확정을 권합니다.
           </p>
           <button class="btn btn-wood" type="button" data-submit disabled>예약 신청</button>
-          <a class="btn btn-outline" href="tel:0318810871">전화 문의</a>
+          <a class="btn btn-outline" href="tel:0318810871">전화로 바로 확정</a>
         </aside>
       </div>
     </main>
@@ -184,15 +184,9 @@
       <div class="book-modal__card">
         <h3 id="book-modal-title">예약 신청이 준비되었습니다</h3>
         <div data-modal-body>
-          <p>
-            결제·확정 시스템은 추후 연동됩니다.<br />
-            급한 일정은 전화로 문의해 주세요.
-          </p>
+          <p>전화·문자·이메일로 바로 이어갈 수 있습니다.</p>
         </div>
-        <button class="btn btn-wood" type="button" data-modal-close>확인</button>
-        <p style="margin-top: 1rem">
-          <a href="tel:0318810871">031-881-0871</a>
-        </p>
+        <button class="btn btn-outline" type="button" data-modal-close>닫기</button>
       </div>
     </div>
 

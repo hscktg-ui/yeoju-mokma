@@ -182,6 +182,25 @@
   font-weight: 400;
 }
 
+.gate__cta {
+  margin: 1.35rem auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.gate__cta-ghost {
+  border-color: rgba(255, 248, 240, 0.45);
+  color: #fff;
+  background: transparent;
+}
+
+.gate__cta-ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
 .gate__line::before {
   content: "";
   position: absolute;

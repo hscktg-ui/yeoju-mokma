@@ -41,14 +41,24 @@
   }
 
   document.querySelectorAll("[data-tabs]").forEach((root) => {
-    const buttons = root.querySelectorAll("[data-tab]");
-    const panels = root.querySelectorAll("[data-panel]");
+    const buttons = [...root.querySelectorAll("[data-tab]")];
+    const panels = [...root.querySelectorAll("[data-panel]")];
+
+    buttons.forEach((btn) => {
+      const id = btn.dataset.tab;
+      const panel = root.querySelector(`[data-panel="${id}"]`);
+      if (panel && !panel.id) panel.id = `panel-${id}`;
+      btn.setAttribute("aria-controls", panel?.id || `panel-${id}`);
+      if (!btn.id) btn.id = `tab-${id}`;
+      if (panel) panel.setAttribute("aria-labelledby", btn.id);
+    });
 
     const activate = (id) => {
       buttons.forEach((btn) => {
         const on = btn.dataset.tab === id;
         btn.classList.toggle("is-active", on);
         btn.setAttribute("aria-selected", on ? "true" : "false");
+        btn.tabIndex = on ? 0 : -1;
       });
       panels.forEach((panel) => {
         const on = panel.dataset.panel === id;
@@ -62,11 +72,26 @@
       }
     };
 
-    buttons.forEach((btn) => {
+    buttons.forEach((btn, i) => {
       btn.addEventListener("click", () => activate(btn.dataset.tab));
+      btn.addEventListener("keydown", (e) => {
+        if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) return;
+        e.preventDefault();
+        let next = i;
+        if (e.key === "ArrowRight") next = (i + 1) % buttons.length;
+        if (e.key === "ArrowLeft") next = (i - 1 + buttons.length) % buttons.length;
+        if (e.key === "Home") next = 0;
+        if (e.key === "End") next = buttons.length - 1;
+        buttons[next].focus();
+        activate(buttons[next].dataset.tab);
+      });
     });
 
     if (location.hash === "#pet") activate("pet");
+    else {
+      const current = buttons.find((b) => b.classList.contains("is-active"))?.dataset.tab || buttons[0]?.dataset.tab;
+      if (current) activate(current);
+    }
   });
 
   document.querySelectorAll("form[data-inquiry]").forEach((form) => {
