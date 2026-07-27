@@ -203,6 +203,17 @@
 
     const now = startOfMonth(new Date());
     els.prev.disabled = state.view <= now;
+
+    // micro feedback on latest pick
+    const pickKey = state.checkOut
+      ? ymd(state.checkOut)
+      : state.checkIn
+        ? ymd(state.checkIn)
+        : null;
+    if (pickKey) {
+      const picked = els.calGrid.querySelector(`[data-date="${pickKey}"]`);
+      picked?.classList.add("is-just-picked");
+    }
   }
 
   function selectDate(date) {
@@ -329,6 +340,13 @@
       guests >= 1;
 
     els.submit.disabled = !ready;
+
+    const summary = root.querySelector(".book-summary");
+    summary?.classList.remove("is-tick");
+    els.sumTotal.classList.remove("is-tick");
+    void summary?.offsetWidth;
+    summary?.classList.add("is-tick");
+    els.sumTotal.classList.add("is-tick");
   }
 
   function render() {

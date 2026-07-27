@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
@@ -18,12 +18,12 @@
   </head>
   <body>
     <a class="skip-link" href="#main">본문 바로가기</a>
-    <div class="util-bar"><div class="util-bar__left"><span><strong>이용시간</strong> 10:00–20:00</span></div><div class="util-bar__right"><a href="directions.html">오시는 길</a><span class="dot" aria-hidden="true">|</span><a href="tel:0318810871">031-881-0871</a></div></div>
     <header class="site-header is-solid">
       <a class="logo" href="index.html">
         <img src="images/brand/logo-mark.png" alt="" width="34" height="34" />
         <span class="logo__word">여주목마</span>
       </a>
+      <p class="status-chip" aria-label="영업 안내"><strong>10:00–20:00</strong><span class="status-chip__sep" aria-hidden="true"></span>월 휴무</p>
       <button class="menu-btn" type="button" aria-label="메뉴" aria-expanded="false">☰</button>
       <nav class="nav" aria-label="주요 메뉴">
         <a href="about.html">이용안내</a>
@@ -41,14 +41,14 @@
         <div class="page-hero__shade" aria-hidden="true"></div>
         <div class="page-hero__content">
           <p class="breadcrumb"><a href="index.html">홈</a> · 시설안내</p>
-          <p class="eyebrow">Facilities</p>
+          <p class="eyebrow">시설</p>
           <h1>수영장 · 글라스룸 · 방갈로</h1>
         </div>
       </section>
 
       <section class="section section--wood">
         <div class="section__head reveal">
-          <p class="eyebrow">Stay & Play</p>
+          <p class="eyebrow">휴식</p>
           <h2>물놀이와 프라이빗 룸</h2>
           <p>
             목마 앞 물놀이장과 잔디 위 글라스룸. 가족·연인·소모임에 맞춰 시간대별 예약을
@@ -83,7 +83,7 @@
 
       <section class="section">
         <div class="section__head reveal">
-          <p class="eyebrow">Guide</p>
+          <p class="eyebrow">이용</p>
           <h2>이용 안내</h2>
         </div>
         <ul class="fact-list reveal" style="max-width:52rem">
@@ -108,71 +108,19 @@
 
       <section class="section section--mist" id="inquiry">
         <div class="section__head reveal">
-          <p class="eyebrow">Reservation</p>
+          <p class="eyebrow">예약</p>
           <h2>수영장 · 룸 예약</h2>
+          <p>날짜와 시설을 한 곳에서 고릅니다. 결제 연동은 준비 중이며, 지금은 예약 신청 UI로 확인할 수 있습니다.</p>
         </div>
         <div class="book-strip reveal">
           <div>
-            <h3>날짜를 고르고 바로 신청</h3>
-            <p>
-              아고다·펜션형 캘린더로 일정을 고른 뒤 글라스룸·방갈로·물놀이장을 선택하세요.
-              결제 연동은 준비 중이며, 지금은 예약 UI로 확인하실 수 있습니다.
-            </p>
+            <h3>캘린더로 일정 선택</h3>
+            <p>글라스룸 · 방갈로 · 물놀이장 · 인원까지 한 화면에서 이어집니다.</p>
           </div>
-          <a class="btn btn-wood" href="booking.html?type=pool">예약하기</a>
-        </div>
-        <div class="inquiry reveal" style="margin-top:1.5rem">
-          <aside class="inquiry__aside">
-            <h3>바로 연락</h3>
-            <dl>
-              <dt>전화</dt>
-              <dd><a href="tel:0318810871">031-881-0871~2</a></dd>
-              <dt>주소</dt>
-              <dd>경기 여주시 명품로 142</dd>
-              <dt>영업</dt>
-              <dd>10:00–20:00 · 월요일 휴무</dd>
-            </dl>
-            <p style="margin-top:1.5rem"><a class="btn btn-outline" href="tel:0318810871">전화하기</a></p>
-          </aside>
-          <form class="form" data-inquiry="수영장·룸">
-            <div class="form-success">문의 내용을 준비했습니다. 메일 앱이 열리면 전송해 주세요.</div>
-            <p class="form-note">온라인 캘린더 예약이 편하시면 <a href="booking.html?type=glass"><strong>예약 페이지</strong></a>를 이용해 주세요.</p>
-            <div class="form-row">
-              <div class="field">
-                <label for="name">이름</label>
-                <input id="name" name="이름" required />
-              </div>
-              <div class="field">
-                <label for="phone">연락처</label>
-                <input id="phone" name="연락처" type="tel" required />
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="field">
-                <label for="date">희망 날짜</label>
-                <input id="date" name="희망날짜" type="date" required />
-              </div>
-              <div class="field">
-                <label for="people">인원</label>
-                <input id="people" name="인원" type="number" min="1" max="20" value="4" />
-              </div>
-            </div>
-            <div class="field">
-              <label for="room">희망 유형</label>
-              <select id="room" name="희망유형">
-                <option>글라스룸 + 수영장</option>
-                <option>플로팅룸 / 독립룸</option>
-                <option>방갈로 · 글램핑형</option>
-                <option>바비큐 패키지</option>
-                <option>상담 후 결정</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="memo">요청 사항</label>
-              <textarea id="memo" name="요청사항"></textarea>
-            </div>
-            <button class="btn btn-wood" type="submit">문의 보내기</button>
-          </form>
+          <div style="display:flex;flex-wrap:wrap;gap:.65rem">
+            <a class="btn btn-wood" href="booking.html?type=pool">예약하기</a>
+            <a class="btn btn-outline" href="tel:0318810871">전화 031-881-0871</a>
+          </div>
         </div>
         <p class="img-credit">사진: 여주목마 현장</p>
       </section>
