@@ -5,8 +5,12 @@
 
   const onScroll = () => {
     if (!header) return;
-    const threshold = document.body.classList.contains("page-intro") ? 10 : 40;
-    header.classList.toggle("is-solid", window.scrollY > threshold);
+    // 내부 페이지는 항상 솔리드 — 최상단에서 흰 글씨가 한지 배경에 묻히는 문제 방지
+    if (!document.body.classList.contains("page-intro")) {
+      header.classList.add("is-solid");
+      return;
+    }
+    header.classList.toggle("is-solid", window.scrollY > 24);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });

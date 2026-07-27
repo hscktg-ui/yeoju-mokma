@@ -19,16 +19,44 @@
   top: 0;
   height: 72px;
   color: #fff;
-  background: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(22, 16, 12, 0.72) 0%,
+    rgba(22, 16, 12, 0.38) 55%,
+    rgba(22, 16, 12, 0) 100%
+  );
   border: 0;
   padding-inline: clamp(1.25rem, 4vw, 3rem);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .page-intro .site-header--intro.is-solid {
-  background: rgba(247, 243, 237, 0.94);
+  background: rgba(247, 243, 237, 0.96);
   color: var(--ink);
   border-bottom: 1px solid rgba(63, 46, 36, 0.1);
   backdrop-filter: blur(14px);
+  text-shadow: none;
+}
+
+.page-intro .site-header--intro:not(.is-solid) .nav a {
+  color: #fff;
+  opacity: 0.95;
+}
+
+.page-intro .site-header--intro:not(.is-solid) .nav a:hover,
+.page-intro .site-header--intro:not(.is-solid) .nav a.is-active {
+  color: #fff;
+  opacity: 1;
+}
+
+.page-intro .site-header--intro:not(.is-solid) .menu-btn {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.page-intro .site-header--intro.is-solid .menu-btn {
+  color: var(--ink);
+  border-color: rgba(63, 46, 36, 0.18);
 }
 
 .page-intro .logo {
@@ -118,8 +146,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(28, 20, 16, 0.42) 0%, rgba(28, 20, 16, 0.12) 38%, rgba(28, 20, 16, 0.78) 100%),
-    linear-gradient(90deg, rgba(28, 20, 16, 0.5) 0%, transparent 58%);
+    linear-gradient(180deg, rgba(18, 12, 10, 0.62) 0%, rgba(28, 20, 16, 0.18) 42%, rgba(28, 20, 16, 0.82) 100%),
+    linear-gradient(90deg, rgba(28, 20, 16, 0.55) 0%, transparent 58%);
 }
 
 .gate__content {
