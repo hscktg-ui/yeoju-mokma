@@ -10,7 +10,7 @@
       meta: "최대 6명 · 수영장 연계",
       price: 120000,
       unit: "회",
-      img: "images/gallery-6.jpg",
+      img: "images/facility-glass.jpg",
       type: "stay",
     },
     {
@@ -20,7 +20,7 @@
       meta: "최대 8명 · 바비큐 상담",
       price: 150000,
       unit: "회",
-      img: "images/gallery-7.jpg",
+      img: "images/facility-bungalow.jpg",
       type: "stay",
     },
     {
@@ -30,7 +30,7 @@
       meta: "인원별 안내 · 룸 병행 가능",
       price: 45000,
       unit: "4인 기준",
-      img: "images/news-pool.jpg",
+      img: "images/facility-pool.jpg",
       type: "day",
     },
     {
